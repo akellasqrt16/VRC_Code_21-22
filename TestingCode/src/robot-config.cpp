@@ -23,8 +23,8 @@ vex::motor  forkliftLeft = vex::motor( vex:: PORT9, true);
 vex::motor  forkliftRight = vex::motor( vex:: PORT20);
 
 //lift motors
-vex::motor  leftLift = vex::motor( vex:: PORT19);
-vex::motor  rightLift = vex::motor( vex:: PORT14,true);
+vex::motor  leftLift = vex::motor( vex:: PORT19, true);
+vex::motor  rightLift = vex::motor( vex:: PORT15);
 
 //Pnuematics
 digital_out p1 = digital_out(Brain.ThreeWirePort.A);
@@ -134,6 +134,18 @@ void forkliftDown(double deg){
   forkliftRight.rotateFor(vex::directionType::rev, deg, vex::rotationUnits::deg);
 }
 
+void pnuemDown(){
+  p1.set(true);
+  p2.set(true);
+}
+
+void pnuemUp(){
+  p1.set(false);
+  p1.set(false);
+}
+
+
+
 
 /*
 * Left side auton
@@ -141,6 +153,7 @@ void forkliftDown(double deg){
 * Alignment: ___
 */
 void leftSideAuton(){
+  moveBackwards(2036.0);
 
 }
 
@@ -187,8 +200,7 @@ void printValueCont(int num) {
   Yeetroller.Screen.print(num);
 }
 
-void printTextCont(const char *str){
-  Yeetroller.Screen.clearScreen();
-  Yeetroller.Screen.setCursor(1, 1);
+void printTextCont(const char *str, int num){
+  Yeetroller.Screen.setCursor(num, 1);
   Yeetroller.Screen.print(str);
 }
