@@ -45,7 +45,7 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   
-  
+  Yeetroller.Screen.clearScreen();
   // infinite loop for the controller binds
   while (1) {  
     
@@ -76,9 +76,9 @@ int main() {
     if (Yeetroller.ButtonX.pressing()){
       reverseMode = !reverseMode;
       if (reverseMode){
-        printTextCont("Reverse Mode: ON", 1);
+        printTextCont("Reverse Mode: ON ", 1);
       } else {
-        printTextCont("Reverse Mode: OFF", 1);
+        printTextCont("Reverse Mode: OFF",1);
       }
       this_thread::sleep_for(400);
     }
@@ -93,7 +93,7 @@ int main() {
     if (Yeetroller.ButtonY.pressing()){
       platformMode = !platformMode;
       if (platformMode){
-        printTextCont("Platform Mode: ON", 10);
+        printTextCont("Platform Mode: ON ", 10);
       } else {
         printTextCont("Platform Mode: OFF", 10);
       }
@@ -140,13 +140,22 @@ int main() {
         rightDriveMotor.spin(vex::directionType::fwd, rightMotorSpeed, vex::velocityUnits::pct);
         rightDriveMotor2.spin(vex::directionType::fwd, rightMotorSpeed, vex::velocityUnits::pct);
       }
-    } else {
-      leftDriveMotor.spin(vex::directionType::fwd, leftMotorSpeed, vex::velocityUnits::pct);
-      leftDriveMotor2.spin(vex::directionType::fwd, leftMotorSpeed, vex::velocityUnits::pct);
-    
+    } 
+    else {
+      if (leftMotorSpeed == 0 && rightMotorSpeed == 0){
+        leftDriveMotor.stop(vex::brakeType::brake);
+        rightDriveMotor.stop(vex::brakeType::brake);
+        leftDriveMotor2.stop(vex::brakeType::brake);
+        rightDriveMotor2.stop(vex::brakeType::brake);
 
-      rightDriveMotor.spin(vex::directionType::fwd, rightMotorSpeed, vex::velocityUnits::pct);
-      rightDriveMotor2.spin(vex::directionType::fwd, rightMotorSpeed, vex::velocityUnits::pct);
+      } else {
+        leftDriveMotor.spin(vex::directionType::fwd, leftMotorSpeed, vex::velocityUnits::pct);
+        leftDriveMotor2.spin(vex::directionType::fwd, leftMotorSpeed, vex::velocityUnits::pct);
+      
+
+        rightDriveMotor.spin(vex::directionType::fwd, rightMotorSpeed, vex::velocityUnits::pct);
+        rightDriveMotor2.spin(vex::directionType::fwd, rightMotorSpeed, vex::velocityUnits::pct);
+      }
     }
     
 
